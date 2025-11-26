@@ -44,12 +44,24 @@ if ingredients_list:
         st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
       
         #Return nutrition information via API
+        NUTRITION_KEY = 'nutrition'
         st.subheader(fruit_chosen + ' Nutrition Information')
         smoothiefroot_response = requests.get(f"http://my.smoothiefroot.com/api/fruit/{search_on}")
-        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+        fruit_data = smoothiefroot_response.json()
+        nutrition_dict = fruit_data.get(NUTRITION_KEY, {})
+        nutrition_items = list(nutrition_dict.items())
+        nutrition_df = pd.DataFrame(
+          nutrition_items, 
+          columns=['Nutrient', 'Value']
+        )
+        st.dataframe(
+          data=nutrition_df, 
+          use_container_width=True,
+          hide_index=True 
+        )        
+st.stop
 
-
-    #st.write(ingredients_string)
+#sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
 #Insert data in SQL table
 #SQL insert statement
