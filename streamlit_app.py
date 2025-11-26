@@ -47,6 +47,8 @@ if ingredients_list:
         NUTRITION_KEY = 'nutrition'
         st.subheader(fruit_chosen + ' Nutrition Information')
         smoothiefroot_response = requests.get(f"http://my.smoothiefroot.com/api/fruit/{search_on}")
+
+        #This code is to only show the nutrition header and value
         fruit_data = smoothiefroot_response.json()
         nutrition_dict = fruit_data.get(NUTRITION_KEY, {})
         nutrition_items = list(nutrition_dict.items())
@@ -59,9 +61,9 @@ if ingredients_list:
           use_container_width=True,
           hide_index=True 
         )        
-    st.stop
-
-#sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
+        
+        #The line below is if showing the whole return
+        #sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
 #Insert data in SQL table
 #SQL insert statement
