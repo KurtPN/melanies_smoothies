@@ -51,16 +51,19 @@ if ingredients_list:
         #This code is to only show the nutrition header and value
         fruit_data = smoothiefroot_response.json()
         nutrition_dict = fruit_data.get(NUTRITION_KEY, {})
-        nutrition_items = list(nutrition_dict.items())
-        nutrition_df = pd.DataFrame(
-          nutrition_items, 
-          columns=['Nutrient', 'Value']
-        )
-        st.dataframe(
-          data=nutrition_df, 
-          use_container_width=True,
-          hide_index=True 
-        )        
+        if nutrition_dict:
+          nutrition_items = list(nutrition_dict.items())
+          nutrition_df = pd.DataFrame(
+            nutrition_items, 
+            columns=['Nutrient', 'Value']
+          )
+          st.dataframe(
+            data=nutrition_df, 
+            use_container_width=True,
+            hide_index=True 
+          )        
+        else:
+          st.info(f"😔 No nutrition information found for **{fruit_chosen}** at this time.")
         
         #The line below is if showing the whole return
         #sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
