@@ -59,7 +59,7 @@ if ingredients_list:
           use_container_width=True,
           hide_index=True 
         )        
-st.stop
+    st.stop
 
 #sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
